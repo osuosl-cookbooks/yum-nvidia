@@ -15,3 +15,11 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+node['yum-nvidia']['repos'].each do |repo|
+  next unless node['yum'][repo]['managed']
+  yum_repository repo do
+    node['yum'][repo].each do |config, value|
+      send(config.to_sym, value) unless value.nil? || config == 'managed'
+    end
+  end
+end

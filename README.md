@@ -1,56 +1,53 @@
 yum-nvidia Cookbook
 ===================
-TODO: Enter the cookbook description here.
 
-e.g.
-This cookbook makes your favorite breakfast sandwich.
+NVIDIA yum repositories used for CUDA or nvidia-docker. This cookbook allows attribute manipulation of ``cuda``,
+``libnvidia-container``, ``nvidia-container-runtime``, and ``nvidia-docker`` repositories.
 
 Requirements
 ------------
-TODO: List your cookbook requirements. Be sure to include any
-requirements this cookbook has on platforms, libraries, other cookbooks,
-packages, operating systems, etc.
 
-e.g.
-#### packages
-- `toaster` - yum-nvidia needs toaster to brown your bagel.
+## Platforms
+
+- RHEL/CentOS and derivatives
+
+## Chef
+
+- Chef 13.8+
+
+## Cookbooks
+
+- none
 
 Attributes
 ----------
-TODO: List your cookbook attributes here.
 
-e.g.
-#### yum-nvidia::default
-<table>
-  <tr>
-    <th>Key</th>
-    <th>Type</th>
-    <th>Description</th>
-    <th>Default</th>
-  </tr>
-  <tr>
-    <td><tt>['yum-nvidia']['bacon']</tt></td>
-    <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
-  </tr>
-</table>
+The following attributes are set by default
+
+```ruby
+default['yum-nvidia']['repos'] = %w(
+  cuda
+  libnvidia-container
+  nvidia-container-runtime
+  nvidia-docker
+)
+```
+
+Check each individual repository attribute file for their default settings.
 
 Usage
 -----
 #### yum-nvidia::default
-TODO: Write usage instructions for each cookbook.
 
-e.g.
-Just include `yum-nvidia` in your node's `run_list`:
+Point the NVIDIA repositories at an internally hosted server.
 
-```json
-{
-  "name":"my_node",
-  "run_list": [
-    "recipe[yum-nvidia]"
-  ]
-}
+```ruby
+node.default['yum']['cuda']['enabled'] = true
+node.default['yum']['cuda']['mirrorlist'] = nil
+node.default['yum']['cuda']['baseurl'] = 'https://internal.example.com/centos/7/os/x86_64'
+node.default['yum']['cuda']['sslverify'] = false
+
+include_recipe 'yum-nvidia'
 ```
 
 Contributing

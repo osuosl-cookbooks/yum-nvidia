@@ -7,6 +7,6 @@ issues_url       'https://github.com/osuosl-cookbooks/yum-nvidia/issues'
 source_url       'https://github.com/osuosl-cookbooks/yum-nvidia'
 description      'Installs/Configures yum-nvidia'
 long_description 'Installs/Configures yum-nvidia'
-version          '0.1.0'
+version          '1.0.0'
 
 supports         'centos', '~> 7.0'

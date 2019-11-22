@@ -37,7 +37,7 @@ describe yum.repo('nvidia-docker') do
   its('baseurl') { should include nvidia_docker_url }
 end
 
-%w(nvidia-docker2 nvidia-driver cuda).each do |p|
+%w(nvidia-docker2 nvidia-driver-latest cuda).each do |p|
   describe package(p) do
     it { should be_installed }
   end

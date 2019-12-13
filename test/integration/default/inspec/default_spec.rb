@@ -4,19 +4,20 @@
 
 # The Inspec reference, with examples and extensive documentation, can be
 # found at http://inspec.io/docs/reference/resources/
+release = os.release.to_i
 if os.arch == 'ppc64le'
-  libnvidia_container_url = 'https://ftp.osuosl.org/pub/osl/repos/yum/7/libnvidia-container/ppc64le'
-  nvidia_container_runtime_url = 'https://ftp.osuosl.org/pub/osl/repos/yum/7/nvidia-container-runtime/ppc64le'
-  nvidia_docker_url = 'https://ftp.osuosl.org/pub/osl/repos/yum/7/nvidia-docker/ppc64le'
+  libnvidia_container_url = "https://ftp.osuosl.org/pub/osl/repos/yum/#{release}/libnvidia-container/ppc64le"
+  nvidia_container_runtime_url = "https://ftp.osuosl.org/pub/osl/repos/yum/#{release}/nvidia-container-runtime/ppc64le"
+  nvidia_docker_url = "https://ftp.osuosl.org/pub/osl/repos/yum/#{release}/nvidia-docker/ppc64le"
 else
-  libnvidia_container_url = 'https://nvidia.github.io/libnvidia-container/centos7/x86_64'
-  nvidia_container_runtime_url = 'https://nvidia.github.io/nvidia-container-runtime/centos7/x86_64'
-  nvidia_docker_url = 'https://nvidia.github.io/nvidia-docker/centos7/x86_64'
+  libnvidia_container_url = "https://nvidia.github.io/libnvidia-container/centos#{release}/x86_64"
+  nvidia_container_runtime_url = "https://nvidia.github.io/nvidia-container-runtime/centos#{release}/x86_64"
+  nvidia_docker_url = "https://nvidia.github.io/nvidia-docker/centos#{release}/x86_64"
 end
 describe yum.repo('cuda') do
   it { should exist }
   it { should be_enabled }
-  its('baseurl') { should include "https://developer.download.nvidia.com/compute/cuda/repos/rhel7/#{os.arch}" }
+  its('baseurl') { should include "https://developer.download.nvidia.com/compute/cuda/repos/rhel#{release}/#{os.arch}" }
 end
 
 describe yum.repo('libnvidia-container') do
@@ -37,7 +38,9 @@ describe yum.repo('nvidia-docker') do
   its('baseurl') { should include nvidia_docker_url }
 end
 
-%w(nvidia-docker2 nvidia-driver-latest cuda).each do |p|
+nvidia_driver = release >= 8 ? 'nvidia-driver' : 'nvidia-driver-latest-dkms'
+
+['nvidia-docker2', nvidia_driver, 'cuda'].each do |p|
   describe package(p) do
     it { should be_installed }
   end

@@ -16,7 +16,7 @@ describe 'yum-nvidia::default' do
             description: 'cuda',
             enabled: true,
             gpgcheck: true,
-            gpgkey: 'https://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/7fa2af80.pub',
+            gpgkey: 'https://developer.download.nvidia.com/compute/cuda/repos/rhel$releasever/x86_64/7fa2af80.pub',
             make_cache: true,
             repositoryid: 'cuda'
           )

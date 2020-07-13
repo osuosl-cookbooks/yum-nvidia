@@ -3,6 +3,10 @@ yum-nvidia CHANGELOG
 This file is used to list changes made in each version of the
 yum-nvidia cookbook.
 
+1.2.0 (2020-07-13)
+------------------
+- Fixes for Chef 15
+
 1.1.1 (2020-01-16)
 ------------------
 - Chef 14 post-migration fixes

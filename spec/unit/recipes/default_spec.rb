@@ -69,52 +69,6 @@ describe 'yum-nvidia::default' do
             sslverify: true
           )
       end
-      context 'ppc64le' do
-        cached(:chef_run) do
-          ChefSpec::SoloRunner.new(p) do |node|
-            node.automatic['kernel']['machine'] = 'ppc64le'
-          end.converge(described_recipe)
-        end
-        it do
-          expect(chef_run).to create_yum_repository('libnvidia-container')
-            .with(
-              baseurl: 'https://ftp.osuosl.org/pub/osl/repos/yum/$releasever/libnvidia-container/$basearch',
-              description: 'libnvidia-container',
-              enabled: true,
-              failovermethod: 'priority',
-              gpgcheck: true,
-              gpgkey: 'https://ftp.osuosl.org/pub/osl/repos/yum/RPM-GPG-KEY-osuosl',
-              make_cache: true,
-              repositoryid: 'libnvidia-container'
-            )
-        end
-        it do
-          expect(chef_run).to create_yum_repository('nvidia-container-runtime')
-            .with(
-              baseurl: 'https://ftp.osuosl.org/pub/osl/repos/yum/$releasever/nvidia-container-runtime/$basearch',
-              description: 'nvidia-container-runtime',
-              enabled: true,
-              failovermethod: 'priority',
-              gpgcheck: true,
-              gpgkey: 'https://ftp.osuosl.org/pub/osl/repos/yum/RPM-GPG-KEY-osuosl',
-              make_cache: true,
-              repositoryid: 'nvidia-container-runtime'
-            )
-        end
-        it do
-          expect(chef_run).to create_yum_repository('nvidia-docker')
-            .with(
-              baseurl: 'https://ftp.osuosl.org/pub/osl/repos/yum/$releasever/nvidia-docker/$basearch',
-              description: 'nvidia-docker',
-              enabled: true,
-              failovermethod: 'priority',
-              gpgcheck: true,
-              gpgkey: 'https://ftp.osuosl.org/pub/osl/repos/yum/RPM-GPG-KEY-osuosl',
-              make_cache: true,
-              repositoryid: 'nvidia-docker'
-            )
-        end
-      end
     end
   end
 end

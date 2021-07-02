@@ -3,6 +3,10 @@ yum-nvidia CHANGELOG
 This file is used to list changes made in each version of the
 yum-nvidia cookbook.
 
+3.0.0 (2021-07-02)
+------------------
+- Switch ppc64le to using upstream repositories
+
 2.0.0 (2021-04-08)
 ------------------
 - Update Chef dependency to >= 16

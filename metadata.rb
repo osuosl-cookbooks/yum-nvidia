@@ -6,7 +6,7 @@ issues_url       'https://github.com/osuosl-cookbooks/yum-nvidia/issues'
 license          'Apache-2.0'
 chef_version     '>= 16.0'
 description      'Installs/Configures yum-nvidia'
-version          '2.0.0'
+version          '3.0.0'
 
 supports         'centos', '~> 8.0'
 supports         'centos', '~> 7.0'

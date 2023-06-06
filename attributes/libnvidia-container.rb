@@ -1,5 +1,5 @@
 default['yum']['libnvidia-container']['baseurl'] =
-  'https://nvidia.github.io/libnvidia-container/centos$releasever/$basearch'
+  "https://nvidia.github.io/libnvidia-container/#{platform}releasever/$basearch"
 default['yum']['libnvidia-container']['gpgcheck'] = false
 default['yum']['libnvidia-container']['gpgkey'] = 'https://nvidia.github.io/libnvidia-container/gpgkey'
 default['yum']['libnvidia-container']['repo_gpgcheck'] = true

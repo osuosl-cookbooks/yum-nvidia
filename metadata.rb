@@ -8,5 +8,5 @@ chef_version     '>= 16.0'
 description      'Installs/Configures yum-nvidia'
 version          '3.0.0'
 
-supports         'centos', '~> 8.0'
+supports         'almalinux', '~> 8.0'
 supports         'centos', '~> 7.0'

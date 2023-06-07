@@ -21,11 +21,12 @@ describe 'yum-nvidia::default' do
             repositoryid: 'cuda'
           )
       end
+
+      platform_group = p == ALMA_8 ? 'rhel' : 'centos'
       it do
         expect(chef_run).to create_yum_repository('libnvidia-container')
           .with(
-            baseurl: 'https://nvidia.github.io/libnvidia-container/centos$releasever/$basearch' if p == CENTOS_7,
-            baseurl: 'https://nvidia.github.io/libnvidia-container/rhel$releasever/$basearch' if p == ALMA_8,
+            baseurl: "https://nvidia.github.io/libnvidia-container/#{platform_group}$releasever/$basearch",
             description: 'libnvidia-container',
             enabled: true,
             failovermethod: 'priority',
@@ -41,8 +42,7 @@ describe 'yum-nvidia::default' do
       it do
         expect(chef_run).to create_yum_repository('nvidia-container-runtime')
           .with(
-            baseurl: 'https://nvidia.github.io/nvidia-container-runtime/centos$releasever/$basearch' if p == CENTOS_7,
-            baseurl: 'https://nvidia.github.io/nvidia-container-runtime/rhel$releasever/$basearch' if p == ALMA_8,
+            baseurl: "https://nvidia.github.io/nvidia-container-runtime/#{platform_group}centos$releasever/$basearch",
             description: 'nvidia-container-runtime',
             enabled: true,
             failovermethod: 'priority',
@@ -58,8 +58,7 @@ describe 'yum-nvidia::default' do
       it do
         expect(chef_run).to create_yum_repository('nvidia-docker')
           .with(
-            baseurl: 'https://nvidia.github.io/nvidia-docker/centos$releasever/$basearch' if p == CENTOS_7,
-            baseurl: 'https://nvidia.github.io/nvidia-docker/rhel$releasever/$basearch' if p == ALMA_8,
+            baseurl: "https://nvidia.github.io/nvidia-docker/#{platform_group}$releasever/$basearch",
             description: 'nvidia-docker',
             enabled: true,
             failovermethod: 'priority',

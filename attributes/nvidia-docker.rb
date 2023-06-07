@@ -1,6 +1,8 @@
-default['yum']['nvidia-docker']['baseurl'] = platform('almalinux') ?
-  'https://nvidia.github.io/nvidia-docker/rhel$releasever/$basearch' :
-  'https://nvidia.github.io/nvidia-docker/centos$releasever/$basearch'
+default['yum']['nvidia-docker']['baseurl'] = if platform('almalinux')
+                                               'https://nvidia.github.io/nvidia-docker/rhel$releasever/$basearch'
+                                             else
+                                               'https://nvidia.github.io/nvidia-docker/centos$releasever/$basearch'
+                                             end
 default['yum']['nvidia-docker']['gpgcheck'] = false
 default['yum']['nvidia-docker']['gpgkey'] = 'https://nvidia.github.io/nvidia-docker/gpgkey'
 default['yum']['nvidia-docker']['repo_gpgcheck'] = true

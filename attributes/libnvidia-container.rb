@@ -1,6 +1,8 @@
-default['yum']['libnvidia-container']['baseurl'] = platform('almalinux') ?
-  'https://nvidia.github.io/libnvidia-container/rhel$releasever/$basearch' :
-  'https://nvidia.github.io/libnvidia-container/centos$releasever/$basearch'
+default['yum']['libnvidia-container']['baseurl'] = if platform('almalinux')
+                                                     'https://nvidia.github.io/libnvidia-container/rhel$releasever/$basearch'
+                                                   else
+                                                     'https://nvidia.github.io/libnvidia-container/centos$releasever/$basearch'
+                                                   end
 default['yum']['libnvidia-container']['gpgcheck'] = false
 default['yum']['libnvidia-container']['gpgkey'] = 'https://nvidia.github.io/libnvidia-container/gpgkey'
 default['yum']['libnvidia-container']['repo_gpgcheck'] = true

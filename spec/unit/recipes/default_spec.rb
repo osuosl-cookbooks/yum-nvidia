@@ -16,7 +16,10 @@ describe 'yum-nvidia::default' do
             description: 'cuda',
             enabled: true,
             gpgcheck: true,
-            gpgkey: 'https://developer.download.nvidia.com/compute/cuda/repos/rhel$releasever/x86_64/7fa2af80.pub',
+            gpgkey: [
+              'https://developer.download.nvidia.com/compute/cuda/repos/rhel$releasever/x86_64/7fa2af80.pub',
+              'https://developer.download.nvidia.com/compute/cuda/repos/rhel$releasever/x86_64/D42D0685.pub',
+            ],
             make_cache: true,
             repositoryid: 'cuda'
           )
@@ -24,7 +27,7 @@ describe 'yum-nvidia::default' do
       it do
         expect(chef_run).to create_yum_repository('libnvidia-container')
           .with(
-            baseurl: 'https://nvidia.github.io/libnvidia-container/centos$releasever/$basearch',
+            baseurl: 'https://nvidia.github.io/libnvidia-container/stable/centos$releasever/$basearch',
             description: 'libnvidia-container',
             enabled: true,
             failovermethod: 'priority',

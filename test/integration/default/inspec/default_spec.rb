@@ -1,6 +1,6 @@
 release = os.release.to_i
 arch = os.arch
-libnvidia_container_url = "https://nvidia.github.io/libnvidia-container/centos#{release}/#{arch}"
+libnvidia_container_url = "https://nvidia.github.io/libnvidia-container/stable/centos#{release}/#{arch}"
 nvidia_container_runtime_url = "https://nvidia.github.io/nvidia-container-runtime/centos#{release}/#{arch}"
 nvidia_docker_url = "https://nvidia.github.io/nvidia-docker/centos#{release}/#{arch}"
 
